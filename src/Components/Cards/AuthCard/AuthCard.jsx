@@ -33,8 +33,8 @@ const AuthCard = ({ handleAuth }) => {
       text: "Hello, how can I assist you today?",
     },
   ]);
-
   const [isLoginBoxVisible, setIsLoginBoxVisible] = useState(false);
+  const [fullScreen, setFullScreen] = useState(false);
 
   const addSessionConversation = async (query, response) => {
     const token = localStorage.getItem("token");
@@ -115,10 +115,7 @@ const AuthCard = ({ handleAuth }) => {
             const response = await getAnswer(inputValue, newController);
             const responseText = response?.data.choices[0].message.content;
 
-            const addedConversations = await addSessionConversation(
-              inputValue,
-              responseText
-            );
+            const addedConversations = await addSessionConversation(inputValue, responseText);
 
             setMessages((prevMessages) => [
               ...prevMessages,
@@ -172,42 +169,6 @@ const AuthCard = ({ handleAuth }) => {
     }
   };
 
-  const handleSize = () => {
-    const card = document.querySelector(".auth-card");
-    const messagesContainer = document.querySelector(".messages-container");
-    const recentLinks = document.querySelector(".recent-links");
-  
-    if (card.classList.contains("fullscreen")) {
-      // Set card dimensions and styles for non-fullscreen mode
-      card.style.height = "500px";
-      card.style.width = "800px";
-      card.style.borderRadius = "10px";
-  
-      messagesContainer.style.height = "325px";
-      messagesContainer.style.overflowY = "scroll";
-      messagesContainer.style.paddingRight = "10px";
-      
-      // Adjust recent-links height
-      recentLinks.style.height = "320px";
-    } else {
-      // Set card dimensions and styles for fullscreen mode
-      card.style.height = "100vh";
-      card.style.width = "100vw";
-      card.style.borderRadius = "0";
-  
-      messagesContainer.style.height = `calc(100vh - 180px)`;
-      messagesContainer.style.overflowY = "scroll";
-      messagesContainer.style.paddingRight = "10px";
-      
-      // Adjust recent-links height
-      recentLinks.style.height = `calc(100vh - 180px)`;
-    }
-  
-    // Toggle fullscreen class
-    card.classList.toggle("fullscreen");
-  };
-  
-
   const handleClear = () => {
     setMessages([
       {
@@ -254,14 +215,11 @@ const AuthCard = ({ handleAuth }) => {
   const fetchChats = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const status = await axios.get(
-        `${process.env.REACT_APP_API}/api/conversations/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const status = await axios.get(`${process.env.REACT_APP_API}/api/conversations/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       // Formatting the messages from the response
       setMessages(
         status.data.data.flatMap((item) =>
@@ -321,10 +279,17 @@ const AuthCard = ({ handleAuth }) => {
 
   return (
     <div className="auth-card">
-      <Header handleSize={handleSize} handleAuth={handleAuth} />
+      <Header handleAuth={handleAuth} fullScreen={fullScreen} setFullScreen={setFullScreen} />
       <div className="auth-body">
         {userName ? (
-          <SideBar userName={userName} setUserName={setUserName} allLinks={allLinks} setMessages={setMessages} currentSession={currentSession} setCurrentSession={setCurrentSession} />
+          <SideBar
+            userName={userName}
+            setUserName={setUserName}
+            allLinks={allLinks}
+            setMessages={setMessages}
+            currentSession={currentSession}
+            setCurrentSession={setCurrentSession}
+          />
         ) : (
           <></>
         )}
@@ -334,14 +299,11 @@ const AuthCard = ({ handleAuth }) => {
             <div className="loading-banner"> Loading...</div>
           ) : (
             <div className="messages-container">
-              <div className="disclamier">
+              <div className="disclaimer">
                 <p>
-                  This is a custom LLM for answering questions about Docker.
-                </p>
-                <p>Answers are based on the contents of the documentation.</p>
-                <p>
-                  This feature is experimental - rate the answers to let us know
-                  what you think!
+                  This is a custom LLM for answering questions about Docker.Answers are based on the
+                  contents of the documentation. This feature is experimental - rate the answers to
+                  let us know what you think!
                 </p>
               </div>
               {messages.map((message, index) => (

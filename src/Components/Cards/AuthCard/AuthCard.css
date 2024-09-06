@@ -87,7 +87,7 @@
     }
 }
 
-.disclamier{
+.disclaimer{
     width: 100%;
     text-align: center;
     display: flex;
@@ -99,7 +99,8 @@
         width: fit-content;
         background-color:rgb(232, 253, 253);
         border-radius: 5px;
-        padding: 2px 5px;
+        padding: 10px;
+        font-size: .7rem;
     }
 }
 
