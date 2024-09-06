@@ -9,8 +9,13 @@ function App() {
 
   return (
     <div className="screen">
-      {DisplayCard === "unauth" ? <UnAuthCard />:null}
-      {DisplayCard === "auth" ? <AuthCard /> : <SelectCard />}
+      {DisplayCard === "unauth" ? <UnAuthCard setDisplayCard={setDisplayCard} /> : null}
+      {DisplayCard === "auth" ? (
+        <AuthCard setDisplayCard={setDisplayCard} />
+      ) : null}
+      {
+        DisplayCard ?null:<SelectCard setDisplayCard={setDisplayCard} DisplayCard={DisplayCard}/>
+      }
     </div>
   );
 }

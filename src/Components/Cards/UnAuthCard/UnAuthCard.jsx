@@ -13,7 +13,7 @@ const modes = [
   "You can only answer questions about the provided context. If you know the answer but it is not based in the provided context, don't provide the answer, just state the answer is not in the context provided. Context information is below. And also provide which context you are using to generate the response.",
 ];
 
-const UnAuthCard = ({handleUnAuth}) => {
+const UnAuthCard = ({setDisplayCard}) => {
   const [inputValue, setInputValue] = useState("");
   const [modeIndex, setModeIndex] = useState(0);
   const [loadingValue, setLoadingValue] = useState("");
@@ -142,7 +142,7 @@ const UnAuthCard = ({handleUnAuth}) => {
 
   return (
     <div className="un-auth-card">
-      <Header handleSize={handleSize} handleUnAuth={handleUnAuth}/>
+      <Header handleSize={handleSize} setDisplayCard={setDisplayCard}/>
       <div className="un-auth-body">
         <div className="messages-container">
           <div className="disclamier">

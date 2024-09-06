@@ -4,7 +4,7 @@ import { LuMinimize } from "react-icons/lu";
 import { FiMaximize } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 
-const Header = ({ handleSize, handleUnAuth, fullScreen, setFullScreen }) => {
+const Header = ({ handleSize, setDisplayCard, fullScreen, setFullScreen }) => {
 
   return (
     <div className="header">
@@ -13,7 +13,7 @@ const Header = ({ handleSize, handleUnAuth, fullScreen, setFullScreen }) => {
         <button className="toggle-size-buttons" onClick={()=>setFullScreen(!fullScreen)} >
           {fullScreen ? <LuMinimize /> : <FiMaximize />}
         </button>
-        <button className="toggle-size-buttons" onClick={handleUnAuth}>
+        <button className="toggle-size-buttons" onClick={()=>setDisplayCard(false)}>
           <IoMdClose />
         </button>
       </div>

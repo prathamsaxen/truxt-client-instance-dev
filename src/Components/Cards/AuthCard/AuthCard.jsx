@@ -16,7 +16,7 @@ const modes = [
   "You can only answer questions about the provided context. If you know the answer but it is not based in the provided context, don't provide the answer, just state the answer is not in the context provided. Context information is below. And also provide which context you are using to generate the response.",
 ];
 
-const AuthCard = ({ handleAuth }) => {
+const AuthCard = ({setDisplayCard }) => {
   const [inputValue, setInputValue] = useState("");
   const [modeIndex, setModeIndex] = useState(0);
   const [loadingValue, setLoadingValue] = useState("");
@@ -279,7 +279,7 @@ const AuthCard = ({ handleAuth }) => {
 
   return (
     <div className="auth-card">
-      <Header handleAuth={handleAuth} fullScreen={fullScreen} setFullScreen={setFullScreen} />
+      <Header setDisplayCard={setDisplayCard} fullScreen={fullScreen} setFullScreen={setFullScreen} />
       <div className="auth-body">
         {userName ? (
           <SideBar
