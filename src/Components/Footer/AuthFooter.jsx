@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import truxtHD from "../../Assets/truxtHD.png";
+import truxtHD from "../../Assets/truxt-icon.png";
 
 const AuthFooter = ({ handleClear, handleLoginShow, userName }) => {
   return (
@@ -11,7 +11,8 @@ const AuthFooter = ({ handleClear, handleLoginShow, userName }) => {
       
       <p>
         Powered by
-        <img src={truxtHD} alt="logo" className="footer-logo" />
+        <a href="http://dev.truxt.xyz/">Truxt</a>
+        {/* <img src={truxtHD} alt="logo" className="footer-logo"/> */}
       </p>
       <button className="class-button" onClick={handleClear}>
         Clear

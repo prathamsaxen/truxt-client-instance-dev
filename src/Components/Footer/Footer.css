@@ -7,8 +7,15 @@
     align-items: center;
     p{
         color: #5e5e5e;
-        display: flex;
-        align-items: center;
+        a{
+            margin-left: 2px;
+            text-decoration: none;
+            color: #28b4fc;
+            font-weight: 800;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
     }
 }
 

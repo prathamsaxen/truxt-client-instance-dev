@@ -1,14 +1,18 @@
 import React from "react";
 import "./Footer.css";
-import truxtHD from "../../Assets/truxtHD.png"
+import truxtHD from "../../Assets/truxtHD.png";
 
-const Footer = ({handleClear}) => {
+const Footer = ({ handleClear }) => {
   return (
     <div className="footer">
-      <p>Powered by
-        <img src={truxtHD} alt="logo" className="footer-logo"/>
+      <p>
+        Powered by
+        <a href="http://dev.truxt.xyz/">Truxt</a>
+        {/* <img src={truxtHD} alt="logo" className="footer-logo"/> */}
       </p>
-      <button className="class-button" onClick={handleClear}>Clear</button>
+      <button className="class-button" onClick={handleClear}>
+        Clear
+      </button>
     </div>
   );
 };
