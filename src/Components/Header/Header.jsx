@@ -4,7 +4,7 @@ import { LuMinimize } from "react-icons/lu";
 import { FiMaximize } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 
-const Header = ({ handleSize, setDisplayCard, fullScreen, setFullScreen }) => {
+const Header = ({ setDisplayCard, fullScreen, setFullScreen }) => {
 
   return (
     <div className="header">

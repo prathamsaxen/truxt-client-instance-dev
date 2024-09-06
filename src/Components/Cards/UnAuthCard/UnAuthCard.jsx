@@ -20,37 +20,13 @@ const UnAuthCard = ({ setDisplayCard }) => {
   const [controller, setController] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isNewComponent, setIsNewComponent] = useState(false);
+  const [fullScreen, setFullScreen] = useState(false);
   const [messages, setMessages] = useState([
     {
       sender: "Bot",
       text: "Hello, how can I assist you today?",
     },
   ]);
-
-  const handleSize = () => {
-    const card = document.querySelector(".un-auth-card");
-    const messagesContainer = document.querySelector(".messages-container");
-
-    if (card.classList.contains("fullscreen")) {
-      card.style.height = "500px";
-      card.style.width = "800px";
-      card.style.borderRadius = "10px";
-
-      messagesContainer.style.height = "325px";
-      messagesContainer.style.overflowY = "scroll";
-      messagesContainer.style.paddingRight = "10px";
-    } else {
-      card.style.height = "100vh";
-      card.style.width = "100vw";
-      card.style.borderRadius = "0";
-
-      messagesContainer.style.height = `calc(100vh - 180px)`;
-      messagesContainer.style.overflowY = "scroll";
-      messagesContainer.style.paddingRight = "10px";
-    }
-
-    card.classList.toggle("fullscreen");
-  };
 
   const handleClear = () => {
     setMessages([
@@ -142,7 +118,7 @@ const UnAuthCard = ({ setDisplayCard }) => {
 
   return (
     <div className="un-auth-card">
-      <Header handleSize={handleSize} setDisplayCard={setDisplayCard} />
+      <Header setDisplayCard={setDisplayCard} fullScreen={fullScreen} setFullScreen={setFullScreen} />
       <div className="un-auth-body">
         <div className="messages-container">
           <div className="disclaimer">
