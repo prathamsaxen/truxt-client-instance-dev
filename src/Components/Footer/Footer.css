@@ -1,0 +1,29 @@
+.footer{
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    p{
+        color: #5e5e5e;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.footer-logo{
+    height: 30px;
+    transform: translateX(-5px);
+}
+
+.class-button{
+    padding: 2px 6px;
+    font-weight: 500;
+}
+
+.truxt-text{
+    font-weight: bolder;
+    color: rgb(39, 39, 75);
+    text-decoration: none;
+}
