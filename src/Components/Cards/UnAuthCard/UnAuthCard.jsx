@@ -13,7 +13,7 @@ const modes = [
   "You can only answer questions about the provided context. If you know the answer but it is not based in the provided context, don't provide the answer, just state the answer is not in the context provided. Context information is below. And also provide which context you are using to generate the response.",
 ];
 
-const UnAuthCard = ({setDisplayCard}) => {
+const UnAuthCard = ({ setDisplayCard }) => {
   const [inputValue, setInputValue] = useState("");
   const [modeIndex, setModeIndex] = useState(0);
   const [loadingValue, setLoadingValue] = useState("");
@@ -142,15 +142,14 @@ const UnAuthCard = ({setDisplayCard}) => {
 
   return (
     <div className="un-auth-card">
-      <Header handleSize={handleSize} setDisplayCard={setDisplayCard}/>
+      <Header handleSize={handleSize} setDisplayCard={setDisplayCard} />
       <div className="un-auth-body">
         <div className="messages-container">
-          <div className="disclamier">
-            <p>This is a custom LLM for answering questions about Docker.</p>
-            <p>Answers are based on the contents of the documentation.</p>
+          <div className="disclaimer">
             <p>
-              This feature is experimental - rate the answers to let us know
-              what you think!
+              This is a custom LLM for answering questions about Docker.Answers are based on the
+              contents of the documentation. This feature is experimental - rate the answers to let
+              us know what you think!
             </p>
           </div>
           {messages.map((message, index) => (
