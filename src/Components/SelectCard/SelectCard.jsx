@@ -1,14 +1,16 @@
-import React from 'react';
+import React from "react";
 import "./SelectCard.css";
+import AI_ICON from "../../Assets/ai.png";
 
-function SelectCard({setDisplayCard}) {
+function SelectCard({ setDisplayCard }) {
   return (
-    <div className='SelectCard'>
-      <h1>Select the appropriate card</h1>
-      <button onClick={()=>{setDisplayCard('auth')}}>Auth Card</button>
-      <button onClick={()=>setDisplayCard('unauth')}>UnAuth Card</button>
+    <div className="SelectCard">
+      <button onClick={() => setDisplayCard("unauth")}>
+        {/* <img src={AI_ICON} alt="Error in loading..." /> */}
+        Ask AI
+      </button>
     </div>
-  )
+  );
 }
 
 export default SelectCard;

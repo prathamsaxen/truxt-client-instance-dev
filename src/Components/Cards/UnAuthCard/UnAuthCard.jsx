@@ -38,8 +38,6 @@ const UnAuthCard = ({ setDisplayCard }) => {
   };
 
   const handleSend = async () => {
-    // setIsNewComponent(true);
-    // setNoConversation(false)
     if (inputValue.trim() !== "") {
       setIsLoading(true);
       setLoadingValue(inputValue);
