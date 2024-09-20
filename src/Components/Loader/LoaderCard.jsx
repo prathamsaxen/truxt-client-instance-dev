@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../AI/AI.css";
 import NameIcon from "../NameIcon/NameIcon";
-import truxt_logo from "../../assets/ai/truxt_logo.svg";
+import truxt_logo from "../../Assets/truxt_logo.svg";
 import ResponseCardLoader from "../Loader/ResponseCardLoader";
 
 function ChatCardAI() {
