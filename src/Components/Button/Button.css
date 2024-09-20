@@ -1,0 +1,19 @@
+.Button{
+    display: inline;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    button{
+        background-color: #f2f2f2;
+        border: none;
+        padding: 5px 15px;
+        border-radius: 5px;
+        font-weight: 600;
+        font-size: 1.2rem;
+        transition: all .1s;
+        cursor: pointer;
+    }
+    button:hover{
+        transform: scale(1.2);
+    }
+}
