@@ -1,5 +1,6 @@
 import React from "react";
-import TruxtModal from "./TruxtModal";
+import TruxtModal  from "../dist/production";
+
 
 function App() {
   return (
