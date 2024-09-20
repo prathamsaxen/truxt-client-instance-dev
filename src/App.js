@@ -1,21 +1,11 @@
-import "./App.css";
-import AuthCard from "./Components/Cards/AuthCard/AuthCard";
-import UnAuthCard from "./Components/Cards/UnAuthCard/UnAuthCard";
-import { useState } from "react";
-import SelectCard from "./Components/SelectCard/SelectCard";
+import React from "react";
+import TruxtModal  from "../dist/production";
+
 
 function App() {
-  const [DisplayCard, setDisplayCard] = useState(false);
-
   return (
-    <div className="screen">
-      {DisplayCard === "unauth" ? <UnAuthCard setDisplayCard={setDisplayCard} /> : null}
-      {DisplayCard === "auth" ? (
-        <AuthCard setDisplayCard={setDisplayCard} />
-      ) : null}
-      {
-        DisplayCard ?null:<SelectCard setDisplayCard={setDisplayCard} DisplayCard={DisplayCard}/>
-      }
+    <div className="App">
+      <TruxtModal API={process.env.REACT_APP_LLM_API} ButtonText={"Ask AI"} />
     </div>
   );
 }

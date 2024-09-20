@@ -30,9 +30,8 @@ const copyToClipboard = (code, setTooltipTitle) => {
     });
 };
 
-const CodeContainer = ({ code }) => {
-  const { firstWord: language, remainingString: codeString } = removeFirstWord(code);
-  const showLineNumbers = codeString.split("\n").length > 1;
+const CodeContainer = ({ code,language }) => {
+  const showLineNumbers = code.split("\n").length > 1;
   const [tooltipTitle, setTooltipTitle] = useState("Copy");
 
   return (
@@ -43,7 +42,7 @@ const CodeContainer = ({ code }) => {
           <Tooltip title={tooltipTitle} placement="top" arrow>
             <button
               className="copy-button"
-              onClick={() => copyToClipboard(codeString, setTooltipTitle)}
+              onClick={() => copyToClipboard(code, setTooltipTitle)}
             >
               <IoCopyOutline style={{height:"14px",width:"14px" }}/>
             </button>
@@ -55,14 +54,14 @@ const CodeContainer = ({ code }) => {
         style={dark}
         showLineNumbers={showLineNumbers}
       >
-        {codeString}
+        {code}
       </SyntaxHighlighter>
       {!language && (
         <div className="single-line-copy">
           <Tooltip title={tooltipTitle} placement="top" arrow>
             <button
               className="copy-button-inside"
-              onClick={() => copyToClipboard(codeString, setTooltipTitle)}
+              onClick={() => copyToClipboard(code, setTooltipTitle)}
             >
               <IoCopyOutline style={{height:"14px",width:"14px"}}/>
             </button>

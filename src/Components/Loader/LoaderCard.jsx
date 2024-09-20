@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../Cards/UnAuthCard/UnAuthCard.css";
+import "../AI/AI.css";
 import NameIcon from "../NameIcon/NameIcon";
 import truxt_logo from "../../Assets/truxt_logo.svg";
 import ResponseCardLoader from "../Loader/ResponseCardLoader";
