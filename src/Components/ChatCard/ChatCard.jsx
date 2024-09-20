@@ -1,6 +1,6 @@
 import React from "react";
 import "./ChatCard.css";
-import truxt_logo from "../../assets/ai/truxt_logo.svg";
+import truxt_logo from "../../Assets/truxt_logo.svg";
 import NameIcon from "../NameIcon/NameIcon";
 import useParseText, { useParseLinks } from "../../hooks/ParseText";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
