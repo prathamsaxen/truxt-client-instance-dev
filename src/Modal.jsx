@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Button from "./Components/Button/Button";
+import AI from "./Components/AI/AI";
 
 function Modal({ API, ButtonText }) {
   const [containerDisplay, setContainerDisplay] = useState(false);
   return (
     <div className="Modal">
-      <Button ButtonText={ButtonText} setContainerDisplay={setContainerDisplay}/>
+      {containerDisplay ? <AI setContainerDisplay={setContainerDisplay} /> : null}
+      <Button ButtonText={ButtonText} setContainerDisplay={setContainerDisplay} />
     </div>
   );
 }
