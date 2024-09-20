@@ -1,10 +1,10 @@
 import React from "react";
-import Modal from "./Modal";
+import TruxtModal from "./TruxtModal";
 
 function App() {
   return (
     <div className="App">
-      <Modal API={process.env.REACT_APP_LLM_API} ButtonText={"Ask AI"} />
+      <TruxtModal API={process.env.REACT_APP_LLM_API} ButtonText={"Ask AI"} />
     </div>
   );
 }

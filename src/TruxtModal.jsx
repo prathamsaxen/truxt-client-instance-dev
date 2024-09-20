@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "./Components/Button/Button";
 import AI from "./Components/AI/AI";
 
-function Modal({ API, ButtonText }) {
+function TruxtModal({ API, ButtonText }) {
   const [containerDisplay, setContainerDisplay] = useState(false);
   return (
     <div className="Modal">
@@ -12,4 +12,4 @@ function Modal({ API, ButtonText }) {
   );
 }
 
-export default Modal;
+export default TruxtModal;
