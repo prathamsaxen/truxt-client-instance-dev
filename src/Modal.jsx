@@ -6,7 +6,7 @@ function Modal({ API, ButtonText }) {
   const [containerDisplay, setContainerDisplay] = useState(false);
   return (
     <div className="Modal">
-      {containerDisplay ? <AI setContainerDisplay={setContainerDisplay} /> : null}
+      {containerDisplay ? <AI setContainerDisplay={setContainerDisplay} API={API} /> : null}
       <Button ButtonText={ButtonText} setContainerDisplay={setContainerDisplay} />
     </div>
   );

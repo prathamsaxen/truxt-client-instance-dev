@@ -8,7 +8,7 @@ import { FiMaximize } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import getAnswer from "../../utils/GetAnswer";
 
-const AI = ({ containerDisplay }) => {
+const AI = ({ setContainerDisplay, API }) => {
   const [inputValue, setInputValue] = useState("");
   const [modeIndex, setModeIndex] = useState(0);
   const [loadingValue, setLoadingValue] = useState("");
@@ -44,7 +44,7 @@ const AI = ({ containerDisplay }) => {
       setController(newController);
 
       try {
-        const response = await getAnswer(inputValue, newController, modeIndex);
+        const response = await getAnswer(API, inputValue, newController, modeIndex);
         const responseText = response?.data.choices[0].message.content;
 
         setMessages((prevMessages) => [
@@ -84,7 +84,7 @@ const AI = ({ containerDisplay }) => {
             <button className="toggle-size-buttons" onClick={() => setFullScreen(!fullScreen)}>
               {fullScreen ? <LuMinimize /> : <FiMaximize />}
             </button>
-            <button className="toggle-size-buttons" onClick={() => containerDisplay(false)}>
+            <button className="toggle-size-buttons" onClick={() => setContainerDisplay(false)}>
               <IoMdClose />
             </button>
           </div>
