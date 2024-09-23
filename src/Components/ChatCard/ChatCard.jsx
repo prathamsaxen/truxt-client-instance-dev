@@ -3,21 +3,21 @@ import "./ChatCard.css";
 import truxt_logo from "../../Assets/truxt_logo.svg";
 import NameIcon from "../NameIcon/NameIcon";
 import useParseText, { useParseLinks } from "../../hooks/ParseText";
-import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+// import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { IoCopyOutline } from "react-icons/io5";
 import Markdown from "react-markdown";
 import CodeContainer from "../CodeContainer/CodeContainer";
 
 // Buttons data
 const buttons = [
-  {
-    button: "Like",
-    icon: AiOutlineLike,
-  },
-  {
-    button: "Dislike",
-    icon: AiOutlineDislike,
-  },
+  // {
+  //   button: "Like",
+  //   icon: AiOutlineLike,
+  // },
+  // {
+  //   button: "Dislike",
+  //   icon: AiOutlineDislike,
+  // },
   {
     button: "Copy",
     icon: IoCopyOutline,

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./NameIcon.css";
 
 const NameIcon = () => {
-const user = "Pratoosh Garg"
+const user = "Pratoosh Saxena"
   const initials = user
     .split(" ")
     .map((n) => n[0])

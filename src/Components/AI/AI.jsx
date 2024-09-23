@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./AI.css";
 import send from "../../Assets/send.svg";
 import { AiCard, UserCard } from "../ChatCard/ChatCard";
@@ -75,6 +75,15 @@ const AI = ({ setContainerDisplay, API }) => {
     }
   };
 
+  const messagesEndRef = useRef(null);
+
+  // Scroll to bottom when new messages are added or loading starts
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isLoading]);
+
   return (
     <div className="ai-wrapper">
       <div className={`un-auth-card ${fullScreen ? "max-card-dimensions" : ""}`}>
@@ -108,6 +117,7 @@ const AI = ({ setContainerDisplay, API }) => {
               </div>
             ))}
             {isLoading && <Loader request={loadingValue} />}
+            <div ref={messagesEndRef} />
           </div>
           {/* <div className="select-container">
             <select
