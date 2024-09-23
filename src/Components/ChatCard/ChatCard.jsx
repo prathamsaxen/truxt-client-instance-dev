@@ -1,29 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ChatCard.css";
 import truxt_logo from "../../Assets/truxt_logo.svg";
 import NameIcon from "../NameIcon/NameIcon";
 import useParseText, { useParseLinks } from "../../hooks/ParseText";
-// import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { IoCopyOutline } from "react-icons/io5";
 import Markdown from "react-markdown";
 import CodeContainer from "../CodeContainer/CodeContainer";
+import Tooltip from "@mui/material/Tooltip";
 
-// Buttons data
-const buttons = [
-  // {
-  //   button: "Like",
-  //   icon: AiOutlineLike,
-  // },
-  // {
-  //   button: "Dislike",
-  //   icon: AiOutlineDislike,
-  // },
-  {
-    button: "Copy",
-    icon: IoCopyOutline,
-  },
-];
-
+// UserCard Component
 export const UserCard = ({ text }) => {
   return (
     <div className="margin-top-response">
@@ -41,13 +26,30 @@ export const AiCard = ({ text }) => {
   const content = useParseText(text);
   const links = useParseLinks(text);
 
+  // State to manage tooltip visibility
+  const [copyTooltip, setCopyTooltip] = useState("Copy");
+
+  // Buttons data
+  const buttons = [
+    {
+      button: "Copy",
+      icon: IoCopyOutline,
+      tooltip: copyTooltip,
+    },
+  ];
+
   // Function to copy the text content of the AI card
   const handleCopy = () => {
-    navigator.clipboard.writeText(text).then(() => {
-      console.log("Text copied to clipboard");
-    }).catch((err) => {
-      console.error("Failed to copy text: ", err);
-    });
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        console.log("Text copied to clipboard");
+        setCopyTooltip("Copied");
+        setTimeout(() => setCopyTooltip("Copy"), 2000); // Reset tooltip after 2 seconds
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+      });
   };
 
   return (
@@ -82,13 +84,11 @@ export const AiCard = ({ text }) => {
         </div>
         <div className="button-group">
           {buttons.map((btn, index) => (
-            <button
-              key={index}
-              className="icon-button"
-              onClick={btn.button === "Copy" ? handleCopy : null} 
-            >
-              <btn.icon />
-            </button>
+            <Tooltip key={index} title={btn.tooltip}>
+              <button className="icon-button" onClick={handleCopy}>
+                <btn.icon />
+              </button>
+            </Tooltip>
           ))}
         </div>
       </div>

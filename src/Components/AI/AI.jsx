@@ -119,18 +119,6 @@ const AI = ({ setContainerDisplay, API }) => {
             {isLoading && <Loader request={loadingValue} />}
             <div ref={messagesEndRef} />
           </div>
-          {/* <div className="select-container">
-            <select
-              id="dropdown-select"
-              className="dropdown-select"
-              value={modeIndex}
-              onChange={(e) => setModeIndex(Number(e.target.value))}
-            >
-              <option value={0}>Internal Data & Web</option>
-              <option value={1}>Web Only</option>
-              <option value={2}>Internal Data only</option>
-            </select>
-          </div> */}
           <div className="input-container">
             <textarea
               type="text"
