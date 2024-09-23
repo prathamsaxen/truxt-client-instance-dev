@@ -45,7 +45,7 @@ export const AiCard = ({ text }) => {
       .then(() => {
         console.log("Text copied to clipboard");
         setCopyTooltip("Copied");
-        setTimeout(() => setCopyTooltip("Copy"), 2000); // Reset tooltip after 2 seconds
+        setTimeout(() => setCopyTooltip("Copy"), 3000); // Reset tooltip after 2 seconds
       })
       .catch((err) => {
         console.error("Failed to copy text: ", err);
@@ -85,7 +85,7 @@ export const AiCard = ({ text }) => {
         <div className="button-group">
           {buttons.map((btn, index) => (
             <Tooltip key={index} title={btn.tooltip}>
-              <button className="icon-button" onClick={handleCopy}>
+              <button className="icon-button" onClick={handleCopy} title="">
                 <btn.icon />
               </button>
             </Tooltip>
