@@ -12,10 +12,14 @@ function Button(_ref) {
     ButtonText,
     setContainerDisplay
   } = _ref;
+  const handleClickToDisplay = () => {
+    setContainerDisplay(true);
+    console.log("Button CLikced");
+  };
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "Button"
   }, /*#__PURE__*/_react.default.createElement("button", {
-    onClick: () => setContainerDisplay(true)
+    onClick: handleClickToDisplay
   }, ButtonText));
 }
 var _default = exports.default = Button;

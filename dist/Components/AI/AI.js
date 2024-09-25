@@ -80,6 +80,16 @@ const AI = _ref => {
       handleSend();
     }
   };
+  const messagesEndRef = (0, _react.useRef)(null);
+
+  // Scroll to bottom when new messages are added or loading starts
+  (0, _react.useEffect)(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+  }, [messages, isLoading]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "ai-wrapper"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -108,6 +118,8 @@ const AI = _ref => {
     text: message.text
   }))), isLoading && /*#__PURE__*/_react.default.createElement(_LoaderCard.default, {
     request: loadingValue
+  }), /*#__PURE__*/_react.default.createElement("div", {
+    ref: messagesEndRef
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "input-container"
   }, /*#__PURE__*/_react.default.createElement("textarea", {

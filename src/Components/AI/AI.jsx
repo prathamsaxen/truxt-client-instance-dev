@@ -84,6 +84,19 @@ const AI = ({ setContainerDisplay, API }) => {
     }
   }, [messages, isLoading]);
 
+  useEffect(() => {
+    const handleEscapeKey = (event) => {
+      if (event.key === "Escape") {
+        setContainerDisplay(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [setContainerDisplay]);
+
   return (
     <div className="ai-wrapper">
       <div className={`un-auth-card ${fullScreen ? "max-card-dimensions" : ""}`}>
