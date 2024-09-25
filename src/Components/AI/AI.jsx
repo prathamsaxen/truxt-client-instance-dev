@@ -8,7 +8,7 @@ import { FiMaximize } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
 import getAnswer from "../../utils/GetAnswer";
 
-const AI = ({ setContainerDisplay, API }) => {
+const AI = ({ Options, setContainerDisplay, API }) => {
   const [inputValue, setInputValue] = useState("");
   const [modeIndex, setModeIndex] = useState(0);
   const [loadingValue, setLoadingValue] = useState("");
@@ -44,7 +44,7 @@ const AI = ({ setContainerDisplay, API }) => {
       setController(newController);
 
       try {
-        const response = await getAnswer(API, inputValue, newController, modeIndex);
+        const response = await getAnswer(Options.API, inputValue, newController, modeIndex);
         const responseText = response?.data.choices[0].message.content;
 
         setMessages((prevMessages) => [
@@ -115,9 +115,9 @@ const AI = ({ setContainerDisplay, API }) => {
           <div className="messages-container">
             <div className="disclaimer">
               <p>
-                This is a custom LLM for answering questions about Docker.Answers are based on the
-                contents of the documentation. This feature is experimental - rate the answers to
-                let us know what you think!
+                {
+                  Options.Disclaimer
+                }
               </p>
             </div>
             {messages.map((message, index) => (

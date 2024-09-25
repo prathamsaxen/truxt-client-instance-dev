@@ -24,7 +24,7 @@ const getAnswer = async (API, prompt, controller, modeIndex) => {
   };
   try {
     const response = await axios.post(
-      `${API}/v1/chat/completions`,
+      `${API}v1/chat/completions`,
       body,
       {
         signal: controller.signal,
