@@ -1,6 +1,6 @@
 .Button{
     display: inline;
-    position: absolute;
+    position: fixed;
     right: 50px;
     bottom: 50px;
     button{

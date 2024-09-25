@@ -18,6 +18,7 @@ function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return 
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const AI = _ref => {
   let {
+    Options,
     setContainerDisplay,
     API
   } = _ref;
@@ -48,7 +49,7 @@ const AI = _ref => {
       const newController = new AbortController();
       setController(newController);
       try {
-        const response = await (0, _GetAnswer.default)(API, inputValue, newController, modeIndex);
+        const response = await (0, _GetAnswer.default)(Options.API, inputValue, newController, modeIndex);
         const responseText = response?.data.choices[0].message.content;
         setMessages(prevMessages => [...prevMessages, {
           sender: "User",
@@ -90,6 +91,17 @@ const AI = _ref => {
       });
     }
   }, [messages, isLoading]);
+  (0, _react.useEffect)(() => {
+    const handleEscapeKey = event => {
+      if (event.key === "Escape") {
+        setContainerDisplay(false);
+      }
+    };
+    document.addEventListener("keydown", handleEscapeKey);
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [setContainerDisplay]);
   return /*#__PURE__*/_react.default.createElement("div", {
     className: "ai-wrapper"
   }, /*#__PURE__*/_react.default.createElement("div", {
@@ -110,7 +122,7 @@ const AI = _ref => {
     className: "messages-container"
   }, /*#__PURE__*/_react.default.createElement("div", {
     className: "disclaimer"
-  }, /*#__PURE__*/_react.default.createElement("p", null, "This is a custom LLM for answering questions about Docker.Answers are based on the contents of the documentation. This feature is experimental - rate the answers to let us know what you think!")), messages.map((message, index) => /*#__PURE__*/_react.default.createElement("div", {
+  }, /*#__PURE__*/_react.default.createElement("p", null, Options.Disclaimer)), messages.map((message, index) => /*#__PURE__*/_react.default.createElement("div", {
     key: index
   }, message.sender === "User" ? /*#__PURE__*/_react.default.createElement(_ChatCard.UserCard, {
     text: message.text

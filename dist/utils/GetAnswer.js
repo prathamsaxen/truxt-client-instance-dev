@@ -21,7 +21,7 @@ const getAnswer = async (API, prompt, controller, modeIndex) => {
     include_sources: modeIndex === 1 ? false : true
   };
   try {
-    const response = await _axios.default.post(`${API}/v1/chat/completions`, body, {
+    const response = await _axios.default.post(`${API}v1/chat/completions`, body, {
       signal: controller.signal
     });
     return response;
