@@ -48,7 +48,6 @@ function removeFirstNumberWithDot(str) {
 
 export const useParseLinks = (t) => {
   const text = extractFormattedText(t);
-  console.log(text);
   let afterSource = true;
   
   if (typeof text !== "string") {
