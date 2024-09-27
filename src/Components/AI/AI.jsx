@@ -6,9 +6,10 @@ import Loader from "../Loader/LoaderCard";
 import { LuMinimize } from "react-icons/lu";
 import { FiMaximize } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
-import getAnswer from "../../utils/GetAnswer";
+// import getAnswer from "../../utils/GetAnswer";
+// import axios from "axios";
 
-const AI = ({ Options, setContainerDisplay, API }) => {
+const AI = ({ Options, setContainerDisplay }) => {
   const [inputValue, setInputValue] = useState("");
   const [modeIndex, setModeIndex] = useState(0);
   const [loadingValue, setLoadingValue] = useState("");
@@ -32,20 +33,77 @@ const AI = ({ Options, setContainerDisplay, API }) => {
     ]);
   };
 
+  const modes = [
+    "You are the top-tier AI Assistant. Provide the most accurate and comprehensive answers possible. Utilize any provided context to enhance your responses and ensure they are as helpful and relevant as possible.",
+    "You are an advanced AI Assistant. Provide detailed and accurate responses based on your general knowledge. Do not rely on any external context or additional information.",
+    "You can only answer questions about the provided context. If you know the answer but it is not based in the provided context, don't provide the answer, just state the answer is not in the context provided. Context information is below. And also provide which context you are using to generate the response.",
+  ];
+
+  const getAnswer = async (Options, prompt,  modeIndex) => {
+    const body = {
+      messages: [
+        {
+          role: "system",
+          content: modes[modeIndex],
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      stream: false,
+      use_context: modeIndex === 1 ? false : true,
+      include_sources: modeIndex === 1 ? false : true,
+    };
+  
+    console.log("GETANSWER Function API CALLED");
+    console.log(Options.API);
+  
+    try {
+      const response = await fetch(`${Options.API}v1/chat/completions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+        // signal: controller.signal,
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (err) {
+      if (err.name === "AbortError") {
+        return "The request was stopped";
+      }
+      console.log(err);
+      return "Something went wrong, please try again later";
+    }
+  };
+  
+
   const handleSend = async () => {
+    console.log("Sent Button CLicked!");
     if (inputValue.trim() !== "") {
       setIsLoading(true);
       setLoadingValue(inputValue);
       if (inputValue) {
         setInputValue("");
       }
+      console.log("Step 2 -> HIT CONTROLLER SENT");
+      // const newController = new AbortController();
+      // setController(newController);
 
-      const newController = new AbortController();
-      setController(newController);
-
+      console.log("TRY CATCH BLOCK STARTED");
       try {
-        const response = await getAnswer(Options.API, inputValue, newController, modeIndex);
-        const responseText = response?.data.choices[0].message.content;
+        const response = await getAnswer(Options, inputValue, modeIndex);
+        
+        // console.log(response.choices[0].message.content);
+        const responseText = response.choices[0].message.content;
 
         setMessages((prevMessages) => [
           ...prevMessages,
@@ -114,11 +172,7 @@ const AI = ({ Options, setContainerDisplay, API }) => {
         <div className="un-auth-body">
           <div className="messages-container">
             <div className="disclaimer">
-              <p>
-                {
-                  Options.Disclaimer
-                }
-              </p>
+              <p>{Options.Disclaimer}</p>
             </div>
             {messages.map((message, index) => (
               <div key={index}>

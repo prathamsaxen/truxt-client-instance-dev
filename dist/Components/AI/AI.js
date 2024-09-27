@@ -12,15 +12,16 @@ var _LoaderCard = _interopRequireDefault(require("../Loader/LoaderCard"));
 var _lu = require("react-icons/lu");
 var _fi = require("react-icons/fi");
 var _io = require("react-icons/io");
-var _GetAnswer = _interopRequireDefault(require("../../utils/GetAnswer"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
 function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+// import getAnswer from "../../utils/GetAnswer";
+// import axios from "axios";
+
 const AI = _ref => {
   let {
     Options,
-    setContainerDisplay,
-    API
+    setContainerDisplay
   } = _ref;
   const [inputValue, setInputValue] = (0, _react.useState)("");
   const [modeIndex, setModeIndex] = (0, _react.useState)(0);
@@ -39,18 +40,63 @@ const AI = _ref => {
       text: "Hello, how can I assist you today?"
     }]);
   };
+  const modes = ["You are the top-tier AI Assistant. Provide the most accurate and comprehensive answers possible. Utilize any provided context to enhance your responses and ensure they are as helpful and relevant as possible.", "You are an advanced AI Assistant. Provide detailed and accurate responses based on your general knowledge. Do not rely on any external context or additional information.", "You can only answer questions about the provided context. If you know the answer but it is not based in the provided context, don't provide the answer, just state the answer is not in the context provided. Context information is below. And also provide which context you are using to generate the response."];
+  const getAnswer = async (Options, prompt, modeIndex) => {
+    const body = {
+      messages: [{
+        role: "system",
+        content: modes[modeIndex]
+      }, {
+        role: "user",
+        content: prompt
+      }],
+      stream: false,
+      use_context: modeIndex === 1 ? false : true,
+      include_sources: modeIndex === 1 ? false : true
+    };
+    console.log("GETANSWER Function API CALLED");
+    console.log(Options.API);
+    try {
+      const response = await fetch(`${Options.API}v1/chat/completions`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+        // signal: controller.signal,
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (err) {
+      if (err.name === "AbortError") {
+        return "The request was stopped";
+      }
+      console.log(err);
+      return "Something went wrong, please try again later";
+    }
+  };
   const handleSend = async () => {
+    console.log("Sent Button CLicked!");
     if (inputValue.trim() !== "") {
       setIsLoading(true);
       setLoadingValue(inputValue);
       if (inputValue) {
         setInputValue("");
       }
-      const newController = new AbortController();
-      setController(newController);
+      console.log("Step 2 -> HIT CONTROLLER SENT");
+      // const newController = new AbortController();
+      // setController(newController);
+
+      console.log("TRY CATCH BLOCK STARTED");
       try {
-        const response = await (0, _GetAnswer.default)(Options.API, inputValue, newController, modeIndex);
-        const responseText = response?.data.choices[0].message.content;
+        const response = await getAnswer(Options, inputValue, modeIndex);
+
+        // console.log(response.choices[0].message.content);
+        const responseText = response.choices[0].message.content;
         setMessages(prevMessages => [...prevMessages, {
           sender: "User",
           text: inputValue

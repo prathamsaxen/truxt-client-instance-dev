@@ -40,7 +40,7 @@ const useParseLinks = t => {
   const text = extractFormattedText(t);
   let afterSource = true;
   if (typeof text !== "string") {
-    console.warn("parseText function received non-string input:", text);
+    // console.warn("parseText function received non-string input:", text);
     return ""; // Return an empty string for non-string input
   }
   const sourceText = text.match(/Source:\s*(.*)/);
